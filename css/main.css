@@ -4,10 +4,12 @@ body {
 }
 
 canvas {
-    border-color: black;
+    border:1px solid #000000;
 }
 
 h1 {
     color: #8b1e47;
     margin-left: 20px;
+    background: darkgrey;
 }
+
