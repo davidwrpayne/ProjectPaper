@@ -1,9 +1,8 @@
-class Ant {
+module.exports = class Ant {
 
-    constructor(postion, direction) {
+    constructor(postion) {
         this.position = postion;
     }
-
 
     draw(canvas, ctx) {
         
@@ -22,9 +21,16 @@ class Ant {
         ctx.beginPath();
         ctx.lineTo(this.position.x+5, this.position.y +5);
         ctx.stroke();
-
     }
+
     setLocation(location) {
         this.position = location;
     }
+
+    update(board) {
+        //
+        // var currentCell = board.cells[]
+
+    }
+
 }

@@ -1,5 +1,5 @@
-// import Ant from "./ant";
-
+import Ant from "./ant";
+import Board from "./board";
 
 // main
 var canvasName = "main-viewport";
@@ -7,9 +7,17 @@ var canvas = null;
 var ctx = null;
 var loaded = false;
 var mouseLocation = null;
+
+// simulation objects
+var numberOfCells = 25;
+var board = null;
 var objects = [];
 var ant = null;
 
+
+/**
+ * The function that setups up the canvas and things like that
+ */
 function screenSetup() {
 
     canvas = document.getElementById(canvasName);
@@ -18,23 +26,31 @@ function screenSetup() {
     canvas.addEventListener('mousemove', handleMouseEvent)
 }
 
-
+/**
+ * The function that sets up objects for the simulation
+ */
 function objectSetup() {
     ant = new Ant({x:100,y:100},null);
     objects.push(ant);
+    board = new Board([]);
 }
-
-
 
 function clearScreen() {
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width, canvas.height);
-    // ctx.stroke();
+    ctx.stroke();
 }
 
 
+/**
+ * Function that handles timesteps.
+ */
 function update(timeDiff) {
     ant.setLocation(mouseLocation);
+    board.update();
+    objects.forEach(function(value,index) {
+        value.update(board);
+    })
 }
 
 
@@ -60,7 +76,6 @@ function drawCircle(location) {
 }
 
 
-
 function draw() {
     clearScreen();
 
@@ -69,7 +84,6 @@ function draw() {
     })
 
 }
-
 
 var lastFrameTimeMs = 0;
 var maxFPS = 60;
